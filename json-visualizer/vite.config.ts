@@ -10,6 +10,9 @@ export default defineConfig({
     open: true
   },
   build: {
-    outDir: 'build'
+    outDir: 'build',
+    assetsDir: 'assets',
+    emptyOutDir: true,
+    sourcemap: false
   }
 })
