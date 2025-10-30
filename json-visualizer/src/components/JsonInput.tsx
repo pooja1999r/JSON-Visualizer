@@ -2,6 +2,7 @@ import { useContext, useMemo } from 'react';
 import { JsonContext } from '../context/JsonContext';
 import { useJsonParser } from '../hooks/useJsonParser';
 import { JsonInputProps } from './types';
+import { EyeIcon } from '@heroicons/react/24/outline';
 import { jsonToNodes } from '../utils/jsonToNodes';
 
 export default function JsonInput({ placeholder }: JsonInputProps) {
@@ -53,13 +54,14 @@ export default function JsonInput({ placeholder }: JsonInputProps) {
 
   return (
     <div className="w-full min-h-screen">
-      <div className="pt-1">
+      <div className="h-12 mt-2 mb-2 flex items-center">
         <button
           onClick={onVisualize}
           type="button"
-          className="inline-flex items-center rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
+          className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
         >
-          Visualize
+          <EyeIcon className="h-4 w-4" />
+          <span>Visualize</span>
         </button>
       </div>
       <textarea

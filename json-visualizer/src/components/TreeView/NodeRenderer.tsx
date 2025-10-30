@@ -1,8 +1,11 @@
 import { Handle, Position } from 'reactflow';
+import { useContext } from 'react';
 import { NodeRendererProps } from '../types';
 import { NodeType } from '../../utils/types';
+import { JsonContext } from '../../context/JsonContext';
 
 export default function NodeRenderer({ data, selected }: NodeRendererProps) {
+  const ctx = useContext(JsonContext);
   const isHighlighted = Boolean(data.highlighted);
   const type = data.type as NodeType | undefined;
 
@@ -17,6 +20,17 @@ export default function NodeRenderer({ data, selected }: NodeRendererProps) {
         selected ? 'ring-2 ring-blue-300' : ''
       ].join(' ').trim()}
       title={`${data.path}${data.value !== undefined ? `: ${String(data.value)}` : ''}`}
+      onClick={() => {
+        if (navigator && 'clipboard' in navigator) {
+          navigator.clipboard.writeText(data.path).then(() => {
+            ctx?.setMessage('Path copied');
+          }).catch(() => {
+            ctx?.setMessage('Failed to copy');
+          });
+        } else {
+          ctx?.setMessage('Clipboard not available');
+        }
+      }}
     >
       <div className={[colorClass, 'font-semibold'].join(' ')}>{data.label}</div>
       <div className="mt-1 text-xs text-gray-500">{data.path}</div>
