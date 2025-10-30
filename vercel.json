@@ -1,0 +1,8 @@
+{
+  "buildCommand": "cd json-visualizer && npm run build",
+  "outputDirectory": "json-visualizer/build",
+  "rewrites": [
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
+
