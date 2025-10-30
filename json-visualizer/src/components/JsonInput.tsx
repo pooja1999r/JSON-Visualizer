@@ -2,6 +2,7 @@ import { useContext, useMemo } from 'react';
 import { JsonContext } from '../context/JsonContext';
 import { useJsonParser } from '../hooks/useJsonParser';
 import { JsonInputProps } from './types';
+import { jsonToNodes } from '../utils/jsonToNodes';
 
 export default function JsonInput({ placeholder }: JsonInputProps) {
   const ctx = useContext(JsonContext);
@@ -43,19 +44,15 @@ export default function JsonInput({ placeholder }: JsonInputProps) {
     }
     setParseError(null);
     setJsonData(data);
-    // nodes/edges will be generated in jsonToNodes utility by the page or caller later
+    // Build nodes/edges immediately for visualization
+    const { nodes, edges } = jsonToNodes(data);
+    setNodes(nodes);
+    setEdges(edges);
     setMessage(null);
   };
 
   return (
     <div className="w-full min-h-screen">
-      <textarea
-        value={rawInput}
-        onChange={(e) => setRawInput(e.target.value)}
-        placeholder={finalPlaceholder}
-        rows={10}
-        className="w-full h-[80vh] rounded-md border border-gray-300 bg-white p-3 font-mono text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-      />
       <div className="pt-1">
         <button
           onClick={onVisualize}
@@ -65,6 +62,14 @@ export default function JsonInput({ placeholder }: JsonInputProps) {
           Visualize
         </button>
       </div>
+      <textarea
+        value={rawInput}
+        onChange={(e) => setRawInput(e.target.value)}
+        placeholder={finalPlaceholder}
+        rows={10}
+        className="w-full h-[80vh] rounded-md border border-gray-300 bg-white p-3 font-mono text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+      />
+     
     </div>
   );
 }

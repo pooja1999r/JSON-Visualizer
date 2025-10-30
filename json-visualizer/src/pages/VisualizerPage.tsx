@@ -24,22 +24,34 @@ export default function VisualizerPage() {
     }
   }, [jsonData, setNodes, setEdges]);
 
-  return (
-    <div className="flex gap-3">
-      <div className="w-1/3 flex" style={{ display: 'flex' }}>
-        <JsonInput />
-      </div>
-      <div className="w-2/3 flex flex-col space-y-3" style={{ display: 'flex', flexDirection: 'column' }}>
-        <SearchBar />
-        <MessageBox />
-        <ReactFlowProvider>
-          <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-600">Graph Controls</div>
-            <ZoomControls />
-          </div>
-          <TreeView />
-        </ReactFlowProvider>
-      </div>
-    </div>
+	return (
+		<div className="p-4 space-y-4">
+	    <MessageBox />
+		<div className="flex items-center justify-between mb-4 rounded-md border border-gray-200 bg-gray-100 p-4 shadow-sm">
+			<h4 className="text-2xl text-center font-bold">JSON Visualizer</h4>
+			<div className="w-4/5">
+				<SearchBar />
+			</div>
+		</div>
+	      <div className="flex gap-4">
+				<div className="w-1/3 flex">
+		    		<div className="w-full">
+		    			<JsonInput />
+		    		</div>
+				</div>
+				<div className="w-2/3 flex">
+					<div className="w-full space-y-3">
+						<ReactFlowProvider>
+							<div className="flex items-center justify-between">
+								<div className="text-sm text-gray-600">Graph Controls</div>
+								<ZoomControls />
+							</div>
+							<TreeView height="75vh" />
+						</ReactFlowProvider>
+					</div>
+				</div>
+	      </div>
+    
+		</div>
   );
 }
