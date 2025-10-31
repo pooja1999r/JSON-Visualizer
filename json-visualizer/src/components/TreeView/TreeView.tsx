@@ -1,4 +1,4 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo, useRef } from 'react';
 import ReactFlow, { Background, Controls, MiniMap, useEdgesState, useNodesState, useReactFlow } from 'reactflow';
 import 'reactflow/dist/style.css';
 import { JsonContext } from '../../context/JsonContext';
@@ -31,12 +31,17 @@ export default function TreeView({ height = '70vh', width = '100%' }: TreeViewPr
     setEdgesState(ctxEdges);
   }, [ctxEdges, setEdgesState]);
 
-  // Fit view on mount and whenever graph changes (if nothing is highlighted)
+  // Fit view on mount and whenever graph size changes (not when highlight toggles)
+  const prevCountsRef = useRef<{ nodes: number; edges: number } | null>(null);
   useEffect(() => {
-    if (!highlightedNodeId) {
+    const counts = { nodes: ctxNodes.length, edges: ctxEdges.length };
+    const prev = prevCountsRef.current;
+    const sizeChanged = !prev || prev.nodes !== counts.nodes || prev.edges !== counts.edges;
+    if (!highlightedNodeId && sizeChanged) {
       fitView({ padding: 0.2, duration: 300 });
     }
-  }, [coloredNodes, highlightedNodeId, fitView]);
+    prevCountsRef.current = counts;
+  }, [ctxNodes.length, ctxEdges.length, highlightedNodeId, fitView]);
 
   useEffect(() => {
     if (highlightedNodeId) {
@@ -56,6 +61,7 @@ export default function TreeView({ height = '70vh', width = '100%' }: TreeViewPr
         edges={edges}
         onNodesChange={onNodesChange}
         onEdgesChange={onEdgesChange}
+        onPaneClick={() => ctx.setHighlightedNodeId(null)}
         nodeTypes={nodeTypes}
         fitView
         fitViewOptions={{ padding: 0.2, includeHiddenNodes: true }}

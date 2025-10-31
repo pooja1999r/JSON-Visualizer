@@ -6,14 +6,16 @@ export default function MessageBox({ className }: MessageBoxProps) {
   const ctx = useContext(JsonContext);
   if (!ctx) return null;
   const { message, setMessage } = ctx;
-  if (!message) return null;
-  const isError = message.includes('No');
+  const isError = message ? message.includes('No') : false;
   const color = isError ? 'text-red-700 border-red-200 bg-red-50' : 'text-green-700 border-green-200 bg-green-50';
 
   useEffect(() => {
+    if (!message) return;
     const timer = setTimeout(() => setMessage(null), 4000);
     return () => clearTimeout(timer);
   }, [message, setMessage]);
+
+  if (!message) return null;
 
   return (
     <div

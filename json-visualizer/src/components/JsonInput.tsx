@@ -65,7 +65,7 @@ export default function JsonInput({ placeholder }: JsonInputProps) {
           <button
             onClick={onVisualize}
             type="button"
-          className="absolute left-3 bottom-3 inline-flex items-center gap-2 rounded-lg bg-[rgb(137,255,196)] px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-md hover:bg-[rgb(120,235,176)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[rgb(120,235,176)] transition-colors duration-200"
+          className="absolute left-3 bottom-3 inline-flex items-center gap-2 rounded-lg bg-[rgb(137,255,196)] px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-md hover:bg-[rgb(120,235,176)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[rgb(120,235,176)] transition-colors duration-200 cursor-pointer"
           >
             <EyeIcon className="h-4 w-4" />
             <span>Visualize</span>

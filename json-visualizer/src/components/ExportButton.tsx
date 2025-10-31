@@ -52,7 +52,7 @@ export default function ExportButton() {
       aria-label="Download SVG"
       type="button"
       onClick={handleExport}
-      className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-white text-gray-700 shadow-sm ring-1 ring-gray-300 hover:bg-[rgb(137,255,196)] hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-[rgb(120,235,176)] transition-colors"
+      className="inline-flex items-center justify-center h-10 w-10 rounded-md bg-white text-gray-700 shadow-sm ring-1 ring-gray-300 hover:bg-[rgb(137,255,196)] hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-[rgb(120,235,176)] transition-colors cursor-pointer"
     >
       <ArrowDownTrayIcon className="h-5 w-5" />
     </button>
