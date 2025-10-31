@@ -1,70 +1,92 @@
-# Getting Started with Create React App
+# JSON Visualizer
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+A fast, modern JSON structure visualizer built with React, Vite, Tailwind CSS, and React Flow. Paste JSON, visualize its hierarchy as a graph, search by JSONPath, and export the current view to SVG.
 
-## Available Scripts
+## Features
 
-In the project directory, you can run:
+- Visualize JSON as an interactive React Flow graph
+  - Fixed-width nodes with clean truncation for long labels/paths
+  - Hover tooltip shows full label, path and value (portal-based, always on top)
+- JSON input with inline "Visualize" button anchored bottom-left of the textarea
+- JSONPath search (e.g. `$.user.address.city` or `items[0].name`)
+  - Matches highlight with darker, thicker type-colored borders
+  - Auto-centers on the matched node (preserving zoom thereafter)
+  - Click on the canvas to clear highlight without changing zoom
+- Top-right overlay controls on the graph
+  - Reset graph state
+  - Export visible viewport to SVG (only what you currently see)
+  - Used the React flow Controls for zoom in, zoom-out and Fit content
+- Theming and polish
+  - Mint-green header and controls styling
+  - Search and action buttons with hover and focus rings
+  - Consistent cursor-pointer on actionable controls
+- Non-intrusive MessageBox for feedback with auto-dismiss
 
-### `npm start`
+## Getting Started
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Prerequisites
+- Node.js 18+
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Install
+```bash
+npm install
+```
 
-### `npm test`
+### Run (development)
+```bash
+npm run dev
+```
+The app runs with Vite. Open the URL shown in the terminal (typically `http://localhost:5173`).
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+### Build
+```bash
+npm run build
+```
+Build artifacts are generated in `build/`.
 
-### `npm run build`
+### Preview production build
+```bash
+npm run preview
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## How to Use
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+1. Paste or type JSON into the left textarea
+   - Click "Visualize" to parse and render the graph.
+2. Search for a node using JSONPath
+   - Example: `$.user.address.city` or `items[0].name`
+   - Matching node gets a darker, thicker border based on type.
+   - Graph auto-centers on first match. Zoom level is preserved afterward.
+3. Explore the graph
+   - Hover a node to see a white tooltip with full label and path.
+   - Click on the canvas to clear any highlight.
+4. Export
+   - Use the top-right download icon to export the currently visible viewport as an SVG.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## Keyboard/Mouse Tips
+- Pan/Zoom: React Flow defaults (drag to pan, wheel to zoom)
+- Click canvas: Clear search highlight
 
-### `npm run eject`
+## Tech Stack
+- React 19 + TypeScript
+- Vite 7
+- Tailwind CSS 4
+- React Flow 11
+- Heroicons 2
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## Project Structure
+- `src/components/JsonInput.tsx`: JSON textarea and visualize button
+- `src/components/SearchBar.tsx`: JSONPath search input and button
+- `src/components/MessageBox.tsx`: transient feedback messages
+- `src/components/TreeView/TreeView.tsx`: React Flow graph
+- `src/components/TreeView/NodeRenderer.tsx`: node UI, truncation, tooltip, highlight styles
+- `src/components/ExportButton.tsx`: exports visible viewport as SVG
+- `src/utils/exportReactFlowView.ts`: export utilities
+- `src/context/JsonContext.tsx`: shared app state
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Notes
+- If a search doesn’t match, a message is shown; messages auto-dismiss or can be closed.
+- Export only includes nodes/edges visible in the current viewport for concise snapshots.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+## License
+This project is for demonstration purposes. Adjust and reuse as needed.
