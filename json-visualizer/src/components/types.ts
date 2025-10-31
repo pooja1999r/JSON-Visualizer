@@ -12,9 +12,6 @@ export type MessageBoxProps = {
   className?: string;
 };
 
-export type ZoomControlsProps = {
-  showLabels?: boolean;
-};
 
 export type TreeViewProps = {
   height?: string;

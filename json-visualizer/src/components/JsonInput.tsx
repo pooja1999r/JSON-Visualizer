@@ -54,23 +54,23 @@ export default function JsonInput({ placeholder }: JsonInputProps) {
 
   return (
     <div className="w-full min-h-screen">
-      <div className="h-12 mt-2 mb-2 flex items-center">
-        <button
-          onClick={onVisualize}
-          type="button"
-          className="inline-flex items-center gap-2 rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white shadow hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-400"
-        >
-          <EyeIcon className="h-4 w-4" />
-          <span>Visualize</span>
-        </button>
+      <div className="relative">
+        <textarea
+          value={rawInput}
+          onChange={(e) => setRawInput(e.target.value)}
+          placeholder={finalPlaceholder}
+          rows={10}
+          className="w-full h-[80vh] rounded-md border border-gray-300 bg-white p-3 pb-14 font-mono text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
+        />
+          <button
+            onClick={onVisualize}
+            type="button"
+          className="absolute left-3 bottom-3 inline-flex items-center gap-2 rounded-lg bg-[rgb(137,255,196)] px-5 py-2.5 text-sm font-semibold text-gray-900 shadow-md hover:bg-[rgb(120,235,176)] focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-[rgb(120,235,176)] transition-colors duration-200"
+          >
+            <EyeIcon className="h-4 w-4" />
+            <span>Visualize</span>
+          </button>
       </div>
-      <textarea
-        value={rawInput}
-        onChange={(e) => setRawInput(e.target.value)}
-        placeholder={finalPlaceholder}
-        rows={10}
-        className="w-full h-[80vh] rounded-md border border-gray-300 bg-white p-3 font-mono text-sm shadow-sm focus:border-indigo-500 focus:outline-none focus:ring-2 focus:ring-indigo-200"
-      />
      
     </div>
   );
